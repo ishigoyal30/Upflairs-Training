@@ -12,18 +12,16 @@ while True:
         
         x1,y1,w,h=(100,200,100,100)
         
-        faces = fd.detectMultiScale(img_gray, scaleFactor = 1, minNeighbors = 5, minSize = (180,180))
+        faces = fd.detectMultiScale(img_gray, scaleFactor = 1.1, minNeighbors = 5, minSize = (180,180))
     
         
         for x1,y1,w,h in faces:
             face = img_gray[y1:y1+h, x1:x1+w].copy()
-            smiles = sd.detectMultiScale( faces, 1.1, 5)
+            smiles = sd.detectMultiScale( faces, 1.1, 5,minSize=(50,50))
             
             if len(smiles) == 1:
                 xs,ys,ws,hs = smiles[0]
-                
-                for xs,ys,ws,hs in smiles:
-                    cv2.rectangle(
+                cv2.rectangle(
                     img,
                     pt1=(xs,ys), pt2=(xs+ws, ys+hs),
                     color=(255,0,255),thickness=1
